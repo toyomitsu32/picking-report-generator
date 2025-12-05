@@ -212,6 +212,15 @@ class DataTransformer
             $part->setSpecification('formatted_height', $formattedHeight);
         }
         
+        // Apply numeric conversion rules to all specifications
+        if (isset($config['numeric_conversion_rules'])) {
+            $specs = $this->applyNumericConversionRules(
+                $part->getSpecifications(),
+                $config['numeric_conversion_rules']
+            );
+            $part->setSpecifications($specs);
+        }
+        
         // Apply default values to specifications
         if (isset($config['part_defaults'])) {
             $specs = $this->applyDefaultValues(

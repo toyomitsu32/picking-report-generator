@@ -185,16 +185,71 @@ class ReportController
     public function getDefaultConfig(): array
     {
         return [
-            'dimension_format' => '%.0f',
+            // 数値フォーマット設定（要件5.1, 5.2）
+            'dimension_format' => '%.1f',  // 小数点1桁
             'dimension_unit' => 'cm',
+            
+            // 条件分岐表示ルール（要件4.1, 4.2）
+            'item_display_rules' => [
+                'shipping_method' => [
+                    'show_if' => ['あり', '○', 'yes', 'Yes'],
+                    'hide_if' => ['なし', '×', 'no', 'No'],
+                ],
+                'packaging' => [
+                    'show_if' => ['あり', '○', 'yes', 'Yes'],
+                    'hide_if' => ['なし', '×', 'no', 'No'],
+                ],
+                'insurance' => [
+                    'show_if' => ['あり', '○', 'yes', 'Yes'],
+                    'hide_if' => ['なし', '×', 'no', 'No'],
+                ],
+                'tracking' => [
+                    'show_if' => ['あり', '○', 'yes', 'Yes'],
+                    'hide_if' => ['なし', '×', 'no', 'No'],
+                ],
+            ],
+            
+            // デフォルト値設定（要件4.3, 5.3）
             'item_defaults' => [
                 'status' => '未処理',
+                'notes' => '-',
+                '担当者' => '指定なし',
             ],
             'part_defaults' => [
                 'notes' => '-',
+                'width' => 0,
+                'height' => 0,
+                'quantity' => 0,
+                'weight' => '-',
             ],
             'metadata_defaults' => [
                 'remarks' => '-',
+                '担当者' => '指定なし',
+                '特記事項' => 'なし',
+            ],
+            
+            // 数値変換ルール（要件5.1, 5.2, 5.4）
+            'numeric_conversion_rules' => [
+                'width' => [
+                    'format' => '%.1f',
+                    'unit' => 'cm',
+                    'decimals' => 1,
+                ],
+                'height' => [
+                    'format' => '%.1f',
+                    'unit' => 'cm',
+                    'decimals' => 1,
+                ],
+                'weight' => [
+                    'format' => '%.2f',
+                    'unit' => 'kg',
+                    'decimals' => 2,
+                ],
+                'price' => [
+                    'format' => '%.0f',
+                    'unit' => '円',
+                    'decimals' => 0,
+                ],
             ],
         ];
     }
