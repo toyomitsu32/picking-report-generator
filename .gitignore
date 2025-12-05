@@ -5,7 +5,6 @@
 
 # Composer
 /vendor/
-composer.lock
 
 # Logs
 /logs/*.log
