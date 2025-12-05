@@ -1,0 +1,32 @@
+{
+    "name": "company/picking-report-generator",
+    "description": "CSV to PDF Picking Report Generator",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.0",
+        "mpdf/mpdf": "^8.0",
+        "vlucas/phpdotenv": "^5.5",
+        "monolog/monolog": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "giorgiosironi/eris": "^0.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "PickingReport\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PickingReport\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

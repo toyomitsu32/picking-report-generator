@@ -1,0 +1,40 @@
+# Environment files
+.env
+.env.local
+.env.production
+
+# Composer
+/vendor/
+composer.lock
+
+# Logs
+/logs/*.log
+!/logs/.gitkeep
+/public/logs/*.log
+
+# Storage
+/storage/tmp/*
+!/storage/tmp/.gitkeep
+/storage/pdf/*
+!/storage/pdf/.gitkeep
+/public/storage/pdf/*
+/public/storage/tmp/*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PHPUnit
+.phpunit.result.cache
+/coverage/
+
+# Temporary files
+*.tmp
+*.bak

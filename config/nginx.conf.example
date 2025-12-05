@@ -1,0 +1,51 @@
+# Nginx configuration example for Picking Report Generator
+
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /path/to/picking-report-generator/public;
+    
+    index index.php;
+    
+    # Security headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    
+    # Disable access to hidden files
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+    
+    # Main location
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    
+    # PHP processing
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        
+        # Increase timeouts for PDF generation
+        fastcgi_read_timeout 60s;
+        fastcgi_send_timeout 60s;
+    }
+    
+    # Deny access to vendor and other sensitive directories
+    location ~ ^/(vendor|config|logs|storage|tests) {
+        deny all;
+        return 404;
+    }
+    
+    # File upload size limit
+    client_max_body_size 10M;
+    
+    # Logging
+    access_log /var/log/nginx/picking-report-access.log;
+    error_log /var/log/nginx/picking-report-error.log;
+}
