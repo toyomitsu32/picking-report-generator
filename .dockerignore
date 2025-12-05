@@ -2,10 +2,11 @@
 .gitignore
 .env
 .DS_Store
-vendor
-node_modules
+vendor/
+node_modules/
 storage/pdf/*.pdf
 logs/*.log
-tests
-.kiro
+tests/
+.kiro/
 *.md
+!composer.lock
