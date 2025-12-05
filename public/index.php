@@ -13,9 +13,9 @@ define('BASE_PATH', dirname(__DIR__));
 // Load Composer autoloader
 require BASE_PATH . '/vendor/autoload.php';
 
-// Load environment variables
+// Load environment variables (if .env file exists)
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
-$dotenv->load();
+$dotenv->safeLoad();
 
 // Set timezone
 date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'Asia/Tokyo');
